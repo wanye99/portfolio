@@ -26,11 +26,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm install
 
       - name: Build
         run: |
@@ -39,7 +36,7 @@ jobs:
           else
             echo "VITE_BASE_PATH=/${{ github.event.repository.name }}/" >> "$GITHUB_ENV"
           fi
-          pnpm build
+          npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
