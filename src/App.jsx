@@ -107,6 +107,140 @@ const projects = [
     ],
   },
   {
+    slug: "monster-rescue",
+    title: "今天也要把猎人拖回来",
+    subtitle: "怪物猎人 IP 轻度衍生玩法 Demo",
+    role: "玩法策划 / 系统设计 / Demo 原型",
+    year: "2026",
+    cover: asset("assets/monster-rescue-cover.jpg"),
+    summary: "从艾露猫救回力尽猎人的视角切入，把搜索情报、救援准备、路线选择与猫车追逃串成一局轻量救援体验。",
+    points: ["IP 视角反转", "搜索与救援", "风险路线", "猫车追逃"],
+    resources: [
+      {
+        label: "查看立项分析 PDF",
+        href: asset("assets/monster-rescue-concept-report.pdf"),
+      },
+      {
+        label: "下载玩法设计 DOCX",
+        href: asset("assets/monster-rescue-game-design.docx"),
+        download: true,
+      },
+      {
+        label: "下载 AI 游戏案例研究",
+        href: asset("assets/ai-game-case-research-2022-2026.xlsx"),
+        download: true,
+      },
+    ],
+    sections: [
+      {
+        title: "Demo 演示",
+        text: "Demo 已实现从行动准备、派遣艾露猫搜索，到确认猎人位置、选择撤离路线和驾驶猫车追逃的完整流程。原型重点验证：玩家能否通过有限猫手、行动时间与情报，在救援速度和路线安全之间做出清晰取舍。",
+        video: asset("assets/monster-rescue-demo-web.mp4"),
+      },
+      {
+        title: "视角反转：失败结算变成主玩法",
+        text: "原作讲猎人如何狩猎怪物，这个项目则让弱小的艾露猫成为救援队。玩家面对的不是复杂武器操作，而是如何在大型怪物仍然活动的危险区域里找到猎人、组织猫手并把他安全拖走。熟悉 IP 的玩家能读到“猫车”梗，新玩家也能立即理解救援目标。",
+        image: asset("assets/monster-rescue-cover.jpg"),
+      },
+      {
+        title: "搜索：用猫手换取情报",
+        text: "地图由多个不同地形与风险的区块组成。投入更多艾露猫可以更快完成搜索、降低猎人持续受伤的代价，但也会消耗更多行动资源。找到猎人后，玩家还要判断是否继续探索未知区域，为后续撤离换取更完整的路线情报。",
+        image: asset("assets/monster-rescue-search.jpg"),
+      },
+      {
+        title: "路线选择：把前期情报变成决策",
+        text: "救援成功后，已探索区域会显示距离、障碍密度与追击压力，未知路线则可能更短但风险不明。玩家可以走稳妥的已知路径，也可以为了节省时间进入未知区域，让前期搜索结果真正影响后半局的撤离策略。",
+        image: asset("assets/monster-rescue-route.jpg"),
+      },
+      {
+        title: "追逃与个性化战报",
+        text: "猫车阶段将规划结果转化为即时操作：玩家需要引导方向、加速并跳跃障碍，同时管理猫车耐久、猎人体力与怪物距离。后续设想由受约束的 AI 动态组合救援事件与事故战报，让每局经历可复盘、可分享，但始终由稳定的救援玩法承担核心乐趣。",
+        image: asset("assets/monster-rescue-chase.jpg"),
+      },
+    ],
+  },
+  {
+    slug: "casual-extraction",
+    title: "休闲化搜打撤",
+    subtitle: "品类分析 / 原创产品方案",
+    role: "品类研究 / 用户反馈归纳 / 系统策划",
+    year: "2026",
+    cover: asset("assets/casual-extraction-cover.png"),
+    summary: "结合 36 条可核验社区线索，拆解搜打撤的四类门槛，并以“木偶避难所”方案重构风险、回收与撤离节奏。",
+    points: ["风险曲线", "社区反馈", "阶段小撤", "原创产品方案"],
+    resources: [
+      {
+        label: "打开完整分析 PDF",
+        href: asset("assets/casual-extraction-analysis.pdf"),
+      },
+      {
+        label: "下载社区反馈归纳",
+        href: asset("assets/extraction-community-feedback.xlsx"),
+        download: true,
+      },
+    ],
+    sections: [
+      {
+        title: "核心判断：不是降难，是重画风险曲线",
+        text: "搜打撤的吸引力来自“带出价值—临场决策—撤离释放”的完整情绪曲线。休闲化不应削平紧张感，而应集中解决高压、高惩罚、高认知和高操作的叠加门槛，把一次性下注改造成可观察、可调整、可阶段回收的风险。",
+        image: asset("assets/casual-extraction-cover.png"),
+      },
+      {
+        title: "社区证据：先让损失可信，再让风险可选",
+        text: "研究归纳了 30 条 Steam 公开评价与 6 条 B 站公开线索。玩家真正排斥的并非风险本身，而是外挂、闪退、掉线、收益不清等不可控因素造成的“不可信损失”。因此产品底线应先保证公平、稳定与清晰恢复，再通过低损失入口、合作 PVE 和可选高价值目标控制压力上限。",
+        image: asset("assets/casual-extraction-insights.png"),
+      },
+      {
+        title: "原创方案：木偶避难所",
+        text: "玩家操控废弃木偶进入危险区域搜集资源、营救同伴并修复社区。木偶可以主动拆下肢体，把它们作为诱饵、工具、机关部件或战斗消耗品，使生命状态、道具栏与解谜能力合并成一套直观资源系统。核心取舍是：保留行动能力，还是用身体换取机会。",
+        image: asset("assets/casual-extraction-product.png"),
+      },
+      {
+        title: "两次“小撤”与最终撤离",
+        text: "安全屋不是提前存档，而是局内风险回收点。玩家把低价值或重复物资兑换成当前局需要的工具，重新判断路线后选择稳妥撤离或继续加码；高价值物资仍必须从最终出口带出。阶段回收降低了认知与沉没成本，同时保留最后一段撤离压力。",
+        image: asset("assets/casual-extraction-safehouse.png"),
+      },
+    ],
+  },
+  {
+    slug: "sekiro-combat",
+    title: "只狼的战斗体验拆解",
+    subtitle: "动作战斗体验分析",
+    role: "战斗系统拆解 / 反馈分析",
+    year: "2026",
+    cover: asset("assets/sekiro-analysis-cover.png"),
+    summary: "从架势、弹刀、攻防主动权与视听反馈出发，分析《只狼》如何把敌人的高压进攻转化为玩家的反击收益。",
+    points: ["架势系统", "攻防转换", "危字攻击", "视听反馈"],
+    resources: [
+      {
+        label: "打开完整分析 PDF",
+        href: asset("assets/sekiro-combat-analysis.pdf"),
+      },
+    ],
+    sections: [
+      {
+        title: "核心循环：在交锋中争夺主动权",
+        text: "Boss 战可以概括为：观察敌人、主动进攻施压、根据反应切换攻防、累积生命与架势优势、制造忍杀机会，再进入下一阶段重新观察。所有机制都在鼓励玩家面对攻击、理解攻击，并用正确回应把敌人的压力转成自己的收益。",
+        image: asset("assets/sekiro-analysis-cover.png"),
+      },
+      {
+        title: "架势把防御改造成进攻",
+        text: "完美弹刀既避免生命损失，也会增加敌人的架势，因此防御不再只是减少伤害。架势离战后会恢复，且生命越低恢复越慢，这让削减生命、保持近身压制和连续弹刀相互支持，推动玩家主动维持战斗节奏。",
+        image: asset("assets/sekiro-posture-system.png"),
+      },
+      {
+        title: "攻防转换形成强交互",
+        text: "玩家的连续攻击会被 Boss 格挡或完美弹反；一旦 Boss 取得反击优先权，继续出刀的风险就会显著提高，玩家需要立刻转入防守或针对性应对。主动权在双方之间快速流动，使战斗更像近距离交锋，而不是等待固定输出窗口。",
+        image: asset("assets/sekiro-initiative-loop.png"),
+      },
+      {
+        title: "“危”字与弹刀反馈承担教学",
+        text: "统一的“危”字先提示普通格挡无法解决问题，再由突刺、下段和投技的动作前摇要求玩家选择识破、跳跃或垫步。弹刀火花、清脆音效、动作姿态和忍杀镜头同时告诉玩家当前由谁掌握主动权，以及下一步是否应该继续进攻。",
+        image: asset("assets/sekiro-combat-feedback.png"),
+      },
+    ],
+  },
+  {
     slug: "monster-hunter-combat",
     title: "怪猎世界中怪物的战斗体验设计",
     subtitle: "战斗体验分析报告",
@@ -360,6 +494,17 @@ function HomePage({ onNavigate, onHomeNav }) {
 }
 
 function ProjectDetail({ project, allProjects, onBack, onNavigate }) {
+  const resourceLinks =
+    project.resources ||
+    (project.pdf
+      ? [
+          {
+            label: "打开完整 PDF",
+            href: project.pdf,
+          },
+        ]
+      : []);
+
   return (
     <main className="site-shell detail-shell">
       <header className="detail-topbar">
@@ -371,16 +516,27 @@ function ProjectDetail({ project, allProjects, onBack, onNavigate }) {
         <div className="page-width detail-hero-grid">
           <div>
             <p className="eyebrow">{project.subtitle}</p>
-            <h1>{project.title}</h1>
+            <h1 className={project.title.length > 12 ? "compact-title" : undefined}>{project.title}</h1>
             <p>{project.summary}</p>
             <div className="detail-meta">
               <span>{project.year}</span>
               <span>{project.role}</span>
             </div>
-            {project.pdf && (
-              <a className="detail-action" href={project.pdf} target="_blank" rel="noreferrer">
-                打开完整 PDF
-              </a>
+            {resourceLinks.length > 0 && (
+              <div className="resource-actions" aria-label="项目资料">
+                {resourceLinks.map((resource) => (
+                  <a
+                    className="detail-action"
+                    href={resource.href}
+                    target={resource.download ? undefined : "_blank"}
+                    rel={resource.download ? undefined : "noreferrer"}
+                    download={resource.download || undefined}
+                    key={resource.label}
+                  >
+                    {resource.label}
+                  </a>
+                ))}
+              </div>
             )}
           </div>
           <img src={project.cover} alt={`${project.title}封面`} />
