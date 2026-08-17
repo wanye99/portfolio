@@ -6,6 +6,7 @@ const projectRoutes = [
   "monster-rescue",
   "casual-extraction",
   "sekiro-combat",
+  "hok-world-combat",
   "monster-hunter-combat",
   "semilinear",
   "campus-events",

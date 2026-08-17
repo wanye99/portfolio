@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import articleData from "./articleData";
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
 const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
@@ -44,13 +45,39 @@ const experiences = [
   },
 ];
 
-const games = [
-  ["无畏契约", "FPS", "500h+", "铂金二，关注竞技节奏、枪线组织与地图控制"],
-  ["CS2", "FPS", "200h+", "熟悉回合经济、道具协同和信息博弈"],
-  ["王者荣耀", "MOBA", "8 年", "长期赛季王者，打野 / 对抗位，韩信、马超单英雄战力曾达 6000 分"],
-  ["原神", "ARPG", "3 年", "冒险等级 60，关注开放世界探索节奏与养成循环"],
-  ["怪物猎人：世界", "ACT", "200h+", "本体与冰原通关，撰写怪物战斗体验分析文档"],
-  ["只狼：影逝二度", "ACT", "体验中", "观察高压反馈、Boss 招式教学与动作惩罚设计"],
+const gameGroups = [
+  {
+    type: "ARPG",
+    tone: "orange",
+    items: [
+      ["艾尔登法环", "120h+", "重点关注敌我攻防交互、攻击窗口与 Boss 招式设计，体验不同敌人的压迫、规避与反击节奏"],
+      ["原神", "活跃约2年", "熟悉核心战斗、角色养成与元素反应体系，对角色循环及长期内容结构有基础理解"],
+      ["绝区零", "100h+", "较系统体验战斗体系，关注角色切换、闪避/招架、失衡机制与队伍循环构成"],
+      ["王者荣耀世界", "100h+", "SO-S1 开服玩家，深度体验游戏战斗系统分析文档《王者荣耀世界战斗系统拆解》"],
+      ["......", "", ""],
+    ],
+  },
+  {
+    type: "ACT",
+    tone: "lime",
+    items: [
+      ["怪物猎人：世界", "200h+", "本体 + DLC 通关，熟悉大部分怪物各种派生技能，分析文档《怪猎世界的怪物体验分析》"],
+      ["只狼：影逝二度", "100h+", "游戏多周目通关，深度体验游戏战斗系统，分析文档《只狼战斗体验分析》"],
+    ],
+  },
+  {
+    type: "FPS",
+    tone: "blue",
+    items: [
+      ["无畏契约", "700h+", "钻石 2 长期竞技体验，具备地图控制、信息博弈、技能协同、转点与攻防节奏理解"],
+      ["CS2", "200h+", "了解传统战术 FPS 的枪械、经济、道具与地图控制框架，主要用于与英雄射击品类进行对比体验"],
+    ],
+  },
+  {
+    type: "其他体验",
+    tone: "lime",
+    summary: "杀戮尖塔2、逃离鸭科夫、去月球、逃生、生灵重塑、逃出生天、双影奇境...",
+  },
 ];
 
 const strengths = [
@@ -67,41 +94,46 @@ const projects = [
     slug: "afterparty",
     title: "余兴派对",
     subtitle: "微恐合作解谜 Demo",
-    role: "玩法策划 / 系统设计 / 视频策划",
+    role: "3C 交互 / 关卡 POI / 系统设计 / 视频策划",
     year: "2026",
     cover: asset("assets/afterparty-main.png"),
-    summary: "围绕“微恐合作、撤离生存、物理交互”搭建单局体验，验证合作解谜与追逃压力之间的节奏关系。",
-    points: ["对局玩法循环", "新手关卡 POI", "物理交互机关", "Boss 追逃节奏"],
+    summary: "负责 3C 操作验证、木偶肢体交互、物理机关与新手 POI 设计，搭建“探索-解谜-追逃-撤离”的合作微恐 Demo。",
+    points: ["3C 操作验证", "木偶肢体交互", "新手关卡 POI", "Boss 追逃节奏"],
     featured: true,
     sections: [
       {
         title: "Demo 演示",
-        text: "Demo 展示了《余兴派对》的主菜单、美术氛围、角色视觉和核心交互方向。当前版本更适合作为体验验证：先确认合作微恐、机关互动和追逃节奏是否成立，再继续扩展更多关卡内容。",
+        text: "围绕可展示 Demo，我整理了主菜单、角色视觉、美术氛围与核心交互演示，重点验证移动、镜头、交互反馈等 3C 基础是否能支撑合作微恐体验，并为后续关卡扩展提供可复用的节奏样板。",
         video: asset("assets/afterparty-demo-web.mp4"),
       },
       {
         title: "项目定位",
-        text: "《余兴派对》希望把“搜打撤”的资源压力，转译成更轻量的合作解谜体验。玩家需要在有限时间内探索区域、处理机关、躲避 Boss，并在互助与互坑之间做选择。整体目标不是单纯做恐怖，而是让玩家在不确定局势中产生沟通、试探和临场决策。",
+        text: "我把项目定位为“轻量搜打撤 + 物理合作解谜”：保留搜刮、资源取舍和撤离释放感，但弱化枪械与硬核数值对抗，把压力转移到机关处理、队友协作和 Boss 追逃上，让玩家在互助与互坑之间产生社交笑点。",
         image: asset("assets/afterparty-main.png"),
       },
       {
+        title: "核心交互设计：木偶肢体系统",
+        text: "核心机制围绕木偶的可拆卸四肢展开：玩家可以主动拔下手脚用于投掷、压机关或触发远处目标，踩中陷阱也会产生断肢惩罚。断腿会降低移动能力，断手会限制搬运和道具使用；失去行动能力的玩家可以吸附到队友背上，转为照明、看图、投掷道具的辅助角色，把失败状态变成合作分工。",
+        image: asset("assets/afterparty-character.png"),
+      },
+      {
         title: "对局玩法循环",
-        text: "单局目标被拆成接受任务、规划探索路线、收集道具、交付或兑换、进入下一回合等阶段。玩家前期需要在收益和风险之间做判断，10 分钟后 Boss 强化进入追逃阶段，让前期探索逐步转为高压决策。",
+        text: "我将单局拆成接受任务、规划路线、搜集谢幕道具、交付或兑换、进入下一回合等阶段。前期让玩家在背包空间、搬运分工和机关风险之间做收益判断；后期通过 Boss 强化和门禁撤离，把探索积累转化为高压追逃决策。",
         image: asset("assets/afterparty-loop.png"),
       },
       {
         title: "新手关卡设计：出生 POI",
-        text: "出生 POI 承担低压教学功能，让玩家先理解基本移动、镜头方向、交互按钮和任务目标。这个区域不直接施加强敌压力，而是通过空间出口、物件摆放和轻量提示，让玩家自然进入探索状态。",
+        text: "出生 POI 承担低压 3C 教学功能：先让玩家理解移动、镜头方向、交互按钮和任务目标。该区域不直接施加强敌压力，而是通过出口方向、物件摆放和轻量提示，让玩家自然进入探索状态。",
         image: asset("assets/afterparty-poi-spawn.png"),
       },
       {
         title: "新手关卡设计：捕鼠笼 POI",
-        text: "捕鼠笼 POI 用来教学“机关风险”和“观察后行动”。玩家需要识别机关触发范围、理解失败代价，并尝试通过路线选择或队友配合规避风险。",
+        text: "捕鼠笼 POI 用来教学“观察后行动”和“机关风险”。玩家需要识别触发范围、理解断肢或减速等失败代价，并尝试通过路线选择、投掷肢体或队友配合规避风险。",
         image: asset("assets/afterparty-poi-trap.png"),
       },
       {
         title: "新手关卡设计：核心 POI",
-        text: "核心 POI 用来承接前面学到的移动、观察、交互和合作知识。这里会把目标物、机关、路线和风险放在同一空间里，让玩家第一次面对较完整的单局问题：如何分工、何时推进、遇到危险是否放弃收益。",
+        text: "核心 POI 用来综合检验移动、观察、交互和合作分工。这里把目标物、机关、搬运路线和风险放在同一空间里，让玩家第一次面对完整单局问题：谁搬运、谁警戒、何时推进、遇到危险是否放弃收益。",
         image: asset("assets/afterparty-poi-core.png"),
       },
     ],
@@ -211,12 +243,7 @@ const projects = [
     cover: asset("assets/sekiro-analysis-cover.png"),
     summary: "从架势、弹刀、攻防主动权与视听反馈出发，分析《只狼》如何把敌人的高压进攻转化为玩家的反击收益。",
     points: ["架势系统", "攻防转换", "危字攻击", "视听反馈"],
-    resources: [
-      {
-        label: "打开完整分析 PDF",
-        href: asset("assets/sekiro-combat-analysis.pdf"),
-      },
-    ],
+    article: articleData.sekiroCombat,
     sections: [
       {
         title: "核心循环：在交锋中争夺主动权",
@@ -241,15 +268,27 @@ const projects = [
     ],
   },
   {
+    slug: "hok-world-combat",
+    title: "王者荣耀世界战斗系统拆解",
+    subtitle: "MMOARPG 战斗系统分析",
+    role: "战斗系统拆解 / PVE 与 PVP 分析",
+    year: "2026",
+    cover: asset(articleData.hokWorldCombat.cover),
+    summary: "围绕《王者荣耀世界》的元素克制、战斗行为、PVE Boss 机制与 PVP 对战结构，拆解其 MMOARPG 战斗体验。",
+    points: ["元素体系", "战斗行为", "PVE 机制", "PVP 对战"],
+    article: articleData.hokWorldCombat,
+    sections: [],
+  },
+  {
     slug: "monster-hunter-combat",
     title: "怪猎世界中怪物的战斗体验设计",
     subtitle: "战斗体验分析报告",
     role: "战斗体验分析 / 系统拆解",
     year: "2026",
     cover: asset("assets/monster-hunter-report-cover.png"),
-    pdf: asset("assets/monster-hunter-combat-report.pdf"),
     summary: "围绕《怪物猎人：世界》的怪物设计，分析狩猎体验如何通过威胁、弱点、节奏争夺和武器反馈形成战斗爽感。",
     points: ["节奏拔河", "威胁与弱点", "Boss 行为逻辑", "武器反馈"],
+    article: articleData.monsterHunterCombat,
     sections: [
       {
         title: "核心观点",
@@ -415,15 +454,26 @@ function HomePage({ onNavigate, onHomeNav }) {
       </section>
 
       <section className="section-block compact" id="games">
-        <div className="page-width">
-          <SectionTitle index="02" title="游戏经历" text="不只是游玩时长，也记录我观察过的设计问题。" />
-          <div className="game-table">
-            {games.map(([name, type, hours, note]) => (
-              <article className="game-row" key={name}>
-                <span>{type}</span>
-                <h3>{name}</h3>
-                <strong>{hours}</strong>
-                <p>{note}</p>
+        <div className="page-width games-showcase">
+          <p className="games-eyebrow">GAME DESIGN PORTFOLIO</p>
+          <h2>游戏经历</h2>
+          <div className="game-group-list">
+            {gameGroups.map((group) => (
+              <article className={group.summary ? "game-group summary" : "game-group"} key={group.type}>
+                <span className={`game-type ${group.tone}`}>{group.type}</span>
+                {group.summary ? (
+                  <p className="game-summary">{group.summary}</p>
+                ) : (
+                  <div className="game-lines">
+                    {group.items.map(([name, hours, note]) => (
+                      <div className="game-line" key={name}>
+                        <h3>{name}</h3>
+                        {hours && <strong>{hours}</strong>}
+                        {note && <p>{note}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </article>
             ))}
           </div>
@@ -495,7 +545,9 @@ function HomePage({ onNavigate, onHomeNav }) {
 
 function ProjectDetail({ project, allProjects, onBack, onNavigate }) {
   const resourceLinks =
-    project.resources ||
+    project.article
+      ? []
+      : project.resources ||
     (project.pdf
       ? [
           {
@@ -506,70 +558,78 @@ function ProjectDetail({ project, allProjects, onBack, onNavigate }) {
       : []);
 
   return (
-    <main className="site-shell detail-shell">
+    <main className={project.article ? "site-shell detail-shell article-mode" : "site-shell detail-shell"}>
       <header className="detail-topbar">
         <button onClick={onBack}>返回项目列表</button>
         <a href="mailto:1366124796@qq.com">联系我</a>
       </header>
 
-      <section className="detail-hero">
-        <div className="page-width detail-hero-grid">
-          <div>
-            <p className="eyebrow">{project.subtitle}</p>
-            <h1 className={project.title.length > 12 ? "compact-title" : undefined}>{project.title}</h1>
-            <p>{project.summary}</p>
-            <div className="detail-meta">
-              <span>{project.year}</span>
-              <span>{project.role}</span>
-            </div>
-            {resourceLinks.length > 0 && (
-              <div className="resource-actions" aria-label="项目资料">
-                {resourceLinks.map((resource) => (
-                  <a
-                    className="detail-action"
-                    href={resource.href}
-                    target={resource.download ? undefined : "_blank"}
-                    rel={resource.download ? undefined : "noreferrer"}
-                    download={resource.download || undefined}
-                    key={resource.label}
-                  >
-                    {resource.label}
-                  </a>
-                ))}
+      {project.article ? (
+        <ArticleHero project={project} />
+      ) : (
+        <section className="detail-hero">
+          <div className="page-width detail-hero-grid">
+            <div>
+              <p className="eyebrow">{project.subtitle}</p>
+              <h1 className={project.title.length > 12 ? "compact-title" : undefined}>{project.title}</h1>
+              <p>{project.summary}</p>
+              <div className="detail-meta">
+                <span>{project.year}</span>
+                <span>{project.role}</span>
               </div>
-            )}
-          </div>
-          <img src={project.cover} alt={`${project.title}封面`} />
-        </div>
-      </section>
-
-      <section className="detail-content">
-        <div className="page-width detail-section-list">
-          {project.sections.map((section, index) => (
-            <article className="detail-section" key={section.title}>
-              <div className="detail-section-copy">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h2>{section.title}</h2>
-                <p>{section.text}</p>
-                {project.pdf && index === project.sections.length - 1 && (
-                  <a className="inline-action" href={project.pdf} target="_blank" rel="noreferrer">
-                    查看完整报告
-                  </a>
-                )}
-              </div>
-              {section.video ? (
-                <video className="detail-video" src={section.video} controls preload="metadata" poster={project.cover} />
-              ) : section.images ? (
-                <div className="detail-gallery">
-                  {section.images.map((image) => (
-                    <img src={image} alt={section.title} key={image} />
+              {resourceLinks.length > 0 && (
+                <div className="resource-actions" aria-label="项目资料">
+                  {resourceLinks.map((resource) => (
+                    <a
+                      className="detail-action"
+                      href={resource.href}
+                      target={resource.download ? undefined : "_blank"}
+                      rel={resource.download ? undefined : "noreferrer"}
+                      download={resource.download || undefined}
+                      key={resource.label}
+                    >
+                      {resource.label}
+                    </a>
                   ))}
                 </div>
-              ) : (
-                <img src={section.image} alt={section.title} />
               )}
-            </article>
-          ))}
+            </div>
+            <img src={project.cover} alt={`${project.title}封面`} />
+          </div>
+        </section>
+      )}
+
+      <section className="detail-content">
+        <div className={project.article ? "page-width article-layout" : "page-width detail-section-list"}>
+          {project.article ? (
+            <ArticleBody article={project.article} />
+          ) : (
+            project.sections.map((section, index) => (
+              <article className="detail-section" key={section.title}>
+                <div className="detail-section-copy">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <h2>{section.title}</h2>
+                  <p>{section.text}</p>
+                  {project.pdf && index === project.sections.length - 1 && (
+                    <a className="inline-action" href={project.pdf} target="_blank" rel="noreferrer">
+                      查看完整报告
+                    </a>
+                  )}
+                </div>
+                {section.video ? (
+                  <video className="detail-video" src={section.video} controls preload="metadata" poster={project.cover} />
+                ) : section.images ? (
+                  <div className="detail-gallery">
+                    {section.images.map((image) => (
+                      <img src={image} alt={section.title} key={image} />
+                    ))}
+                  </div>
+                ) : (
+                  <img src={section.image} alt={section.title} />
+                )}
+              </article>
+            ))
+          )}
         </div>
       </section>
 
@@ -591,6 +651,143 @@ function ProjectDetail({ project, allProjects, onBack, onNavigate }) {
       </section>
     </main>
   );
+}
+
+function ArticleHero({ project }) {
+  return (
+    <section className="article-hero">
+      <div className="page-width article-layout">
+        <p className="article-kicker">{project.subtitle}</p>
+        <h1>{project.article.title}</h1>
+        <div className="article-meta">
+          <span>原创</span>
+          <strong>叶鹏达</strong>
+          <span>{project.year}</span>
+          <span>{project.role}</span>
+        </div>
+        <p className="article-summary">{project.summary}</p>
+      </div>
+    </section>
+  );
+}
+
+function ArticleBody({ article }) {
+  let figureIndex = 0;
+
+  return (
+    <article className="article-reader">
+      {article.blocks.map((block, index) => {
+        if (block.type === "heading") {
+          const headingClass = getArticleHeadingClass(block.text);
+          const HeadingTag = headingClass === "major" ? "h2" : "h3";
+          return (
+            <HeadingTag className={`article-heading-${headingClass}`} key={index}>
+              {block.text}
+            </HeadingTag>
+          );
+        }
+
+        if (block.type === "paragraph") {
+          return block.text.split(/\n+/).map((text, partIndex) => <p key={`${index}-${partIndex}`}>{text}</p>);
+        }
+
+        if (block.type === "image") {
+          figureIndex += 1;
+          const figureStyle = getArticleFigureStyle(block);
+          return (
+            <figure className="article-figure" style={figureStyle} key={index}>
+              <img src={asset(block.src)} alt={block.alt || `${article.title}图示 ${figureIndex}`} />
+            </figure>
+          );
+        }
+
+        if (block.type === "imageTable") {
+          return <ArticleImageTable block={block} article={article} key={index} />;
+        }
+
+        if (block.type === "table") {
+          const columnCount = Math.max(...block.rows.map((row) => row.length));
+          const isSingleCell = block.rows.length === 1 && columnCount === 1;
+
+          if (isSingleCell) {
+            return (
+              <div className="article-callout" key={index}>
+                {block.rows[0][0]}
+              </div>
+            );
+          }
+
+          return (
+            <div className="article-table-wrap" key={index}>
+              <table>
+                <tbody>
+                  {block.rows.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {Array.from({ length: columnCount }).map((_, cellIndex) => {
+                        const CellTag = rowIndex === 0 ? "th" : "td";
+                        return <CellTag key={cellIndex}>{row[cellIndex] || ""}</CellTag>;
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+
+        return null;
+      })}
+    </article>
+  );
+}
+
+function ArticleImageTable({ block, article }) {
+  const columnCount = Math.max(...block.rows.map((row) => row.length));
+
+  return (
+    <div className="article-image-table" style={{ "--columns": columnCount }}>
+      {block.rows.map((row, rowIndex) =>
+        row.map((cell, cellIndex) => (
+          <figure className="article-image-cell" key={`${rowIndex}-${cellIndex}`}>
+            {cell.images.map((image, imageIndex) => (
+              <img
+                src={asset(image.src)}
+                alt={image.alt || `${article.title}图示`}
+                style={image.width ? { width: `${image.width}px` } : undefined}
+                key={`${image.src}-${imageIndex}`}
+              />
+            ))}
+            {cell.text && cell.images.length > 0 && <figcaption>{cell.text}</figcaption>}
+            {cell.text && cell.images.length === 0 && <p>{cell.text}</p>}
+          </figure>
+        ))
+      )}
+    </div>
+  );
+}
+
+function getArticleFigureStyle(block) {
+  const style = {};
+  if (block.width) {
+    style.width = `${block.width}px`;
+  }
+  if (block.align === "center") {
+    style.marginLeft = "auto";
+    style.marginRight = "auto";
+  } else if (block.align === "right") {
+    style.marginLeft = "auto";
+  } else {
+    style.marginRight = "auto";
+  }
+  return style;
+}
+
+function getArticleHeadingClass(text) {
+  const compact = text.replace(/\s+/g, "");
+  if (/^[一二三四五六七八九十]+[、.．]/.test(compact)) return "major";
+  if (/^\d+[.．、]/.test(compact)) return "minor";
+  if (compact.length <= 10 && !/[。！？；;]$/.test(compact)) return "major";
+  return "minor";
 }
 
 function Header({ onHomeNav }) {
