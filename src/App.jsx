@@ -99,10 +99,6 @@ const projects = [
     cover: asset("assets/qusha-cover.png"),
     summary: "跟随墨化《驱煞》课程实践，以俯视角战斗 Demo 串联角色冲刺、GAS 技能、Boss 行为树与成长配置，学习将战斗规则拆解为可执行、可调试的蓝图逻辑。",
     points: ["GAS 技能与状态", "Boss 行为树", "数据驱动配置", "战斗原型验证"],
-    resources: [
-      { label: "课程来源 · 墨化 MOTZIFY", href: "https://www.motzify.com/course" },
-      { label: "墨化官方《驱煞》课程介绍", href: "https://www.bilibili.com/video/BV1Az421U7Ua/" },
-    ],
     sections: [
       {
         title: "实机演示：从技能到战斗循环",
