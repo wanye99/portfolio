@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { copyFileSync, mkdirSync } from "node:fs";
 
 const projectRoutes = [
+  "qusha",
   "afterparty",
   "monster-rescue",
   "casual-extraction",

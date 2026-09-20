@@ -91,6 +91,62 @@ const strengths = [
 
 const projects = [
   {
+    slug: "qusha",
+    title: "驱煞",
+    subtitle: "UE 蓝图实战 / 墨化课程跟做",
+    role: "蓝图跟做实践 / GAS 技能 / Boss AI / 数据配置",
+    year: "2026",
+    cover: asset("assets/qusha-cover.png"),
+    summary: "跟随墨化《驱煞》课程实践，以俯视角战斗 Demo 串联角色冲刺、GAS 技能、Boss 行为树与成长配置，学习将战斗规则拆解为可执行、可调试的蓝图逻辑。",
+    points: ["GAS 技能与状态", "Boss 行为树", "数据驱动配置", "战斗原型验证"],
+    resources: [
+      { label: "课程来源 · 墨化 MOTZIFY", href: "https://www.motzify.com/course" },
+      { label: "墨化官方《驱煞》课程介绍", href: "https://www.bilibili.com/video/BV1Az421U7Ua/" },
+    ],
+    sections: [
+      {
+        title: "实机演示：从技能到战斗循环",
+        text: "这段约 3 分 50 秒的录像记录了当前跟做成果：升级词条与法术效果、部分敌人及 Boss 技能，以及移动、攻击、击败敌人和升级选择的连续演示。我借助灰盒场景观察技能范围与敌我交互，把单个功能放回实际战斗中检验。",
+        video: asset("assets/qusha-demo-web.mp4"),
+      },
+      {
+        title: "学习定位：把规则落实为原型",
+        text: "本项目是墨化 MOTZIFY「UE5 独立游戏创作者全流程孵化班—《驱煞》」的课程跟做作品，游戏案例与教学方案来源于课程。我的实践重点是理解并复现蓝图逻辑，梳理角色、技能、敌人和成长数据之间的关系。页面展示当前学习成果，不代表课程全部内容均已完成。",
+        image: asset("assets/qusha-scene.png"),
+      },
+      {
+        title: "角色冲刺：串起技能执行流程",
+        text: "跟做 GA_Dash，将技能激活、提交、方向计算、角色转向、效果施加、动画蒙太奇播放与技能结束串联起来。通过这个具体案例，我学习了 Gameplay Ability 的执行流程，也开始把“冲刺手感”拆成方向、位移表现、保护时间与动作衔接等可分别检查的环节。",
+        image: asset("assets/qusha-dash.png"),
+      },
+      {
+        title: "无敌状态：分清动作与效果",
+        text: "在 Gameplay Effect 中配置持续时间，通过 Set by Caller 接收时长，并赋予 Buff.DamageImmune 标签；冲刺蓝图再调用该效果。这个练习让我理解了技能动作、状态标记与持续时间的分工，为后续理解受伤判断和临时增益的组织方式建立基础。",
+        image: asset("assets/qusha-immunity.png"),
+      },
+      {
+        title: "敌人技能：理解共用逻辑与命中时机",
+        text: "跟做 GA_EnemySkillBase，将技能提交、蒙太奇播放、Gameplay Event 接收和命中处理放入共用流程，并处理播放完成、中断或取消时的技能结束。学习重点是用动画事件衔接命中逻辑，以及通过技能基类复用共同步骤，让不同招式在统一结构上扩展。",
+        image: asset("assets/qusha-enemy-skill.png"),
+      },
+      {
+        title: "Boss AI：把招式选择写成条件",
+        text: "在螃蟹 Boss 行为树中，通过黑板记录目标与距离，结合目标存活、距离条件和技能可用性选择行为，再执行转向、释放技能、等待或追击。这个过程让我把“Boss 何时出什么招”的体验问题，转化为条件、优先级与执行顺序，并理解 AI 决策和技能执行之间的连接。",
+        image: asset("assets/qusha-boss-tree.png"),
+      },
+      {
+        title: "敌人配置：用表格组织战斗差异",
+        text: "敌人表集中整理名称、类型、生命、攻击力、移速、经验值与蓝图类引用，涵盖普通敌人、特殊敌人、精英和 Boss。通过跟做，我学习把配置数据与行为逻辑分开管理，也更明确地理解：敌人的压力来源，需要结合数值、移动方式和攻击行为一起判断。",
+        image: asset("assets/qusha-enemy-data.png"),
+      },
+      {
+        title: "成长配置：连接数值、描述与反馈",
+        text: "角色与法术强化表将等级上限、数值、加法或乘法类型、描述占位符和图标资源组织在一起，覆盖生命、移速、冷却、范围、持续时间及发射数量等维度。结合录像中的升级选择，我学习了数据配置如何支撑成长选项，并建立了核对“配置值—界面说明—实际效果”的意识。",
+        image: asset("assets/qusha-upgrade-data.png"),
+      },
+    ],
+  },
+  {
     slug: "afterparty",
     title: "余兴派对",
     subtitle: "微恐合作解谜 Demo",
